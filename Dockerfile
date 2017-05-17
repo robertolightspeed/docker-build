@@ -61,5 +61,7 @@ ENV DOCKER_COMPOSE_VERSION 1.13.0
 RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
       chmod +x /usr/local/bin/docker-compose;
 
+COPY docker-entrypoint.sh /usr/local/bin/
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["sh"]
