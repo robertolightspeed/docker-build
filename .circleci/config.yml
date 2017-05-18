@@ -1,16 +1,18 @@
 version: 2
 jobs:
   build:
-    docker: docker
+    docker:
+      - image: docker
     working_directory: /tmp/build
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Build container
           command: |
-            docker build -t michielrensen/docker-build:"v${CIRCLE_BUILD_NUM}" -t michielrensen/docker-build:latest
+            TAG="v${CIRCLE_BUILD_NUM}"
+            docker build -t michielrensen/docker-build:$TAG -t michielrensen/docker-build:latest .
       - deploy:
-          name: Publish container
-          command:
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
+          command: |
+            docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
             docker push michielrensen/docker-build
