@@ -37,3 +37,5 @@ RUN sudo apt-key adv --fetch-keys https://dl.yarnpkg.com/debian/pubkey.gpg && \
   sudo apt-get update && sudo apt-get install -y \
   yarn=$YARN_VERSION \
   --no-install-recommends && sudo rm -r /var/lib/apt/lists/*
+
+ENV ENV="/etc/profile"
