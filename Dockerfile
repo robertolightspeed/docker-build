@@ -38,4 +38,10 @@ RUN sudo apt-key adv --fetch-keys https://dl.yarnpkg.com/debian/pubkey.gpg && \
   yarn=$YARN_VERSION \
   --no-install-recommends && sudo rm -r /var/lib/apt/lists/*
 
-ENV ENV="/etc/profile"
+# Codacy Code Coverage
+RUN composer global require codacy/coverage
+COPY composer.sh /etc/profile.d/composer.sh  
+
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoints.sh
+
+ENTRYPOINT ["docker-entrypoints.sh"]
