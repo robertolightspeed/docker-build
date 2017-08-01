@@ -20,6 +20,7 @@ RUN curl -sS https://getcomposer.org/installer | sudo php -- --version="${COMPOS
 
 # NVM
 ENV NODE_VERSION 6.1.0
+ENV YARN_VERSION 0.27.5
 COPY nvm.sh /etc/profile.d/nvm.sh
 RUN sudo git clone https://github.com/creationix/nvm.git /opt/nvm; \
   sudo mkdir -p /usr/local/node /usr/local/nvm && \
@@ -28,15 +29,8 @@ RUN sudo git clone https://github.com/creationix/nvm.git /opt/nvm; \
   nvm install $NODE_VERSION && \
   nvm use $NODE_VERSION && \
   nvm alias default $NODE_VERSION && \
-  nvm version
-
-# YARN
-ENV YARN_VERSION 0.21.3-1
-COPY yarn.list /etc/apt/sources.list.d/yarn.list
-RUN sudo apt-key adv --fetch-keys https://dl.yarnpkg.com/debian/pubkey.gpg && \
-  sudo apt-get update && sudo apt-get install -y \
-  yarn=$YARN_VERSION \
-  --no-install-recommends && sudo rm -r /var/lib/apt/lists/*
+  nvm version && \
+  npm install -g yarn@${YARN_VERSION}
 
 # Codacy Code Coverage
 RUN composer global require codacy/coverage
