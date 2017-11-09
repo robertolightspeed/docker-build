@@ -21,7 +21,7 @@ RUN curl -sS https://getcomposer.org/installer | sudo php -- --version="${COMPOS
 
 # NVM
 ENV NODE_VERSION 8.9.0
-ENV YARN_VERSION 1.2.1
+ENV YARN_VERSION 1.3.2
 COPY nvm.sh /etc/profile.d/nvm.sh
 RUN sudo git clone https://github.com/creationix/nvm.git /opt/nvm; \
   sudo mkdir -p /usr/local/node /usr/local/nvm && \
