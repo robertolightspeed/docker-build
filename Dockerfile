@@ -17,7 +17,9 @@ RUN sudo apt-get update && sudo apt-get install -y \
 
 # Composer
 ENV COMPOSER_VERSION 1.4.2
-RUN curl -sS https://getcomposer.org/installer | sudo php -- --version="${COMPOSER_VERSION}" --install-dir="/usr/local/bin" --filename="composer"
+COPY composer.sh /etc/profile.d/composer.sh  
+RUN curl -sS https://getcomposer.org/installer | sudo php -- --version="${COMPOSER_VERSION}" --install-dir="/usr/local/bin" --filename="composer" && \
+  composer global require codacy/coverage phpunit/phpcov
 
 # NVM
 ENV NODE_VERSION 8.9.1
@@ -32,10 +34,6 @@ RUN sudo git clone https://github.com/creationix/nvm.git /opt/nvm; \
   nvm alias default $NODE_VERSION && \
   nvm version && \
   npm install -g yarn@${YARN_VERSION}
-
-# Codacy Code Coverage
-RUN composer global require codacy/coverage
-COPY composer.sh /etc/profile.d/composer.sh  
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoints.sh
 
