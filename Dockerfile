@@ -1,4 +1,4 @@
-FROM circleci/php:5.6
+FROM circleci/php:5.6-cli-node-browsers
 
 # Packages
 RUN sudo apt-get update && sudo apt-get install -y \
@@ -7,34 +7,11 @@ RUN sudo apt-get update && sudo apt-get install -y \
   libmcrypt-dev \
   libxml2-dev \
   mysql-client \
-  php5-cli \
   vim \
   wget \
   zlib1g-dev \
   --no-install-recommends && sudo rm -r /var/lib/apt/lists/* \
-  && sudo docker-php-ext-install mcrypt soap zip \
-  && sudo docker-php-ext-enable mcrypt soap zip
+  && sudo docker-php-ext-install mcrypt soap zip
 
 # Composer
-ENV COMPOSER_VERSION 1.4.2
-COPY composer.sh /etc/profile.d/composer.sh  
-RUN curl -sS https://getcomposer.org/installer | sudo php -- --version="${COMPOSER_VERSION}" --install-dir="/usr/local/bin" --filename="composer" && \
-  composer global require codacy/coverage phpunit/phpcov
-
-# NVM
-ENV NODE_VERSION 8.9.1
-ENV YARN_VERSION 1.3.2
-COPY nvm.sh /etc/profile.d/nvm.sh
-RUN sudo git clone https://github.com/creationix/nvm.git /opt/nvm; \
-  sudo mkdir -p /usr/local/node /usr/local/nvm && \
-  sudo chmod 0777 -R /usr/local/nvm; sudo chmod 0777 -R /usr/local/node; \
-  . /etc/profile.d/nvm.sh && \
-  nvm install $NODE_VERSION && \
-  nvm use $NODE_VERSION && \
-  nvm alias default $NODE_VERSION && \
-  nvm version && \
-  npm install -g yarn@${YARN_VERSION}
-
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoints.sh
-
-ENTRYPOINT ["docker-entrypoints.sh"]
+RUN  composer global require codacy/coverage phpunit/phpcov
