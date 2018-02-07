@@ -14,4 +14,4 @@ RUN sudo apt-get update && sudo apt-get install -y \
   && sudo docker-php-ext-install mcrypt soap zip
 
 # Composer
-RUN  composer global require codacy/coverage phpunit/phpcov
+RUN  composer global require codacy/coverage "phpunit/phpcov:~2.0" "phpunit/phpunit:~4.8"
