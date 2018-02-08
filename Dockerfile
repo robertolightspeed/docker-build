@@ -6,6 +6,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
   gnupg-curl \
   libmcrypt-dev \
   libxml2-dev \
+  moreutils \
   mysql-client \
   vim \
   wget \
