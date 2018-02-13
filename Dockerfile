@@ -16,7 +16,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
   && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 
 # Composer
-RUN  composer global require codacy/coverage "phpunit/phpcov:~2.0" "phpunit/phpunit:~4.8"
+RUN  composer global require codacy/coverage "phpunit/phpcov:~2.0" "phpunit/phpunit:~4.8" "sensiolabs/security-checker:^3.0"
 
 # NVM
 RUN export NVM_DIR="$HOME/.nvm" \
