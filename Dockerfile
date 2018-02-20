@@ -13,6 +13,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
   zlib1g-dev \
   --no-install-recommends && sudo rm -r /var/lib/apt/lists/* \
   && sudo docker-php-ext-install mcrypt soap zip \
+  && sudo pecl install xdebug-2.5.5 \
+  && sudo docker-php-ext-disable xdebug \
   && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 
 # Composer
