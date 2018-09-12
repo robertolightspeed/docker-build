@@ -4,7 +4,7 @@ FROM circleci/php:5.6-cli-node-browsers
 RUN sudo apt-get update && sudo apt-get install -y \
   apt-transport-https \
   curl \
-  gnupg-curl \
+  gnupg1-curl \
   libmcrypt-dev \
   libxml2-dev \
   moreutils \
