@@ -3,6 +3,7 @@ FROM circleci/php:5.6-cli-node-browsers
 # Packages
 RUN sudo apt-get update && sudo apt-get install -y \
   apt-transport-https \
+  curl \
   gnupg-curl \
   libmcrypt-dev \
   libxml2-dev \
